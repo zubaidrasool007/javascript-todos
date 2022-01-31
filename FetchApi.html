@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetching data</title>
+    <style>
+         table,
+        th,
+        td {
+            border: 1px solid;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+
+        table {
+            margin-top: 20px;
+           
+        }
+        tr:nth-child(even){
+            background-color:	#b2beb5;
+        }
+        th{
+            background-color: 	#848482;
+        }
+
+    </style>
+</head>
+<body>
+    <table id="table">
+        <tr>
+            <th> Name</th>
+            <th> Email</th>
+            <th>City</th>
+            <th> Company Name </th>
+            <th>Complete Address</th>
+        </tr>
+        <tbody id="tbody"></tbody>
+
+    </table>
+    <script>
+        
+    fetch('https://jsonplaceholder.typicode.com/users').then(function(data){
+        return data.json()
+        
+    }).then(function(data){
+    
+        data.forEach(function (e) {
+            // addin a row in table
+            let tr1 = document.createElement("tr");
+            // adiing a heading
+            let tr1data1 = document.createElement("td");
+            let tr1data2 = document.createElement("td");
+            let tr1data3 = document.createElement("td");
+            let tr1data4 = document.createElement("td");
+            let tr1data5 = document.createElement("td");
+            // appeniding row and headings
+            tr1.appendChild(tr1data1);
+            tr1.appendChild(tr1data2);
+            tr1.appendChild(tr1data3);
+            tr1.appendChild(tr1data4);
+            tr1.appendChild(tr1data5);
+
+            tbody.appendChild(tr1);
+            tr1data1.innerHTML = e.name;
+            tr1data2.innerHTML = e.email;
+            tr1data3.innerHTML = e.address.city;
+            tr1data4.innerHTML = e.company.name;
+            tr1data5.innerHTML = e.address.street + ',' + e.address.suite +','+
+            e.address.city+','+e.address.zipcode +','+e.address.city+','+e.address.geo.lat+','+e.address.geo.lng
+            
+         
+        })
+    })
+</script>
+</body>
+</html>
